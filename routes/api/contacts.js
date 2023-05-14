@@ -1,13 +1,25 @@
 const express = require('express')
-
+const data = require("../../models/contacts")
 const router = express.Router()
 
-router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
+// Get list of contacts
+router.get("/contacts", async (req, res, next)=> {
+  const result = await data.listContacts();
+  res.json(result);
 })
 
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+// Get contact by id
+router.get("/:id", async (req, res) => {
+  try {
+    const {id} = req.params;
+    const result = await data.getContactById(id);
+    res.json(result);
+  }
+  catch (error) {
+    res.status(500).json({
+      message: "Server error"
+    })
+  }
 })
 
 router.post('/', async (req, res, next) => {
