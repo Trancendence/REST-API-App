@@ -3,9 +3,16 @@ const data = require("../../models/contacts")
 const router = express.Router()
 
 // Get list of contacts
-router.get("/contacts", async (req, res, next)=> {
+router.get("/", async (req, res)=> {
+  try {
   const result = await data.listContacts();
   res.json(result);
+}
+catch(error) {
+  res.status(500).json({
+    message: "Server error"
+  })
+}
 })
 
 // Get contact by id
