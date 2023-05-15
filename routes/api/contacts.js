@@ -53,7 +53,19 @@ router.post("/", async(req, res, next)=> {
 
 // Delete
 router.delete('/:id', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  try {
+    const {id} = req.params;
+    const result = await data.removeContact(id);
+    if(!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.json({
+      message: "Delete success"
+    })
+  } 
+  catch (error) {
+    next(error);
+  }
 })
 
 // Put
