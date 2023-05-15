@@ -5,11 +5,10 @@ const router = express.Router()
 const {HttpError} = require("../../models/HttpError")
 const Joi = require("joi")
 const addSchema = Joi.object({
-  name:Joi.string().required(),
-  email:Joi.string().required(),
-  phone:Joi.string().required(),
+  name:Joi.string().required().alphanum().min(3).max(30),
+  email:Joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+  phone:Joi.number().required(),
 })
-
 // Get list
 router.get("/", async (req, res, next)=> {
   try {
@@ -60,7 +59,7 @@ router.delete('/:id', async (req, res, next) => {
       throw HttpError(404, "Not found");
     }
     res.json({
-      message: "Delete success"
+      message: "contact deleted"
     })
   } 
   catch (error) {
