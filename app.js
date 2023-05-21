@@ -2,7 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 const mongoose = require("mongoose")
-const DB_HOST = "mongodb+srv://baydindenys:iRAMLfPVZ0GFzMih@transcedence.qm6y54a.mongodb.net/db-contacts?retryWrites=true&w=majority"
+const {DB_HOST} = process.env;
 const contactsRouter = require('./routes/api/contacts')
 
 const app = express()
@@ -15,9 +15,10 @@ app.use(express.json())
 
 app.use('/api/contacts', contactsRouter)
 
+mongoose.set('strictQuery', true);
+
 mongoose.connect(DB_HOST)
 .then(() => {
-app.listen(3000);
 console.log("Database connection successful");
 })
 .catch(error => {
