@@ -3,7 +3,7 @@ const logger = require('morgan')
 const cors = require('cors')
 const mongoose = require("mongoose")
 // const {DB_HOST} = process.env;
-const {DB_HOST} = "mongodb+srv://baydindenys:iRAMLfPVZ0GFzMih@transcedence.qm6y54a.mongodb.net/?retryWrites=true&w=majority";
+const DB_HOST = "mongodb+srv://baydindenys:iRAMLfPVZ0GFzMih@transcedence.qm6y54a.mongodb.net/?retryWrites=true&w=majority";
 const contactsRouter = require('./routes/api/contacts')
 
 const app = express()
