@@ -13,9 +13,9 @@ router.get("/:id", ctrl.getById);
 router.post("/", ctrl.addById);
 
 // Delete
-router.delete('/:id', 
+router.delete('/:id', ctrl.deleteById);
 
 // Put
-router.put('/:id', ctrl.updateById)
+router.put('/:id', ctrl.updateById);
 
 module.exports = router
