@@ -2,15 +2,15 @@
 // const path = require("node:path");
 // const {nanoid} = require("nanoid");
 // const contactsPath = path.join(__dirname, "contacts.json");
-const Contacts = require("../../models/contact");
+// const Contacts = require("../../models/contact");
 
 
 
 // List 
-const list = async (req, res) => {
-  const contact = await Contacts.find();
-  res.json(contact);
-}
+// const list = async (req, res) => {
+//   const contact = await Contacts.find();
+//   res.json(contact);
+// }
 
 // Get by id
 // const getById = async (id) => {
@@ -55,10 +55,10 @@ const list = async (req, res) => {
 //   return contacts[index];
 // }
 
-module.exports = {
-  list: ctrlWrapper(list),
+// module.exports = {
+  // list: ctrlWrapper(list),
   // getById: ctrlWrapper(getById),
   // deleteById: ctrlWrapper(deleteById),
   // addById: ctrlWrapper(addById),
   // updateById: ctrlWrapper(updateById),
-}
+// }

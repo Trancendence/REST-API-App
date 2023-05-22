@@ -1,93 +1,56 @@
-const Joi = require("joi")
 const data = require("../models/contacts");
-const { HttpError , ctrlWrapper } = require('../helpers');
+const { HttpError, ctrlWrapper } = require('../helpers');
 
-const addSchema = Joi.object({
-  name:Joi.string().required().alphanum().min(3).max(30),
-  email:Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-  phone:Joi.number().required(),
-})
 
 // list
 const list = async(req, res)=> {
-    try {
-        const result = await data.list();
-        res.json(result);
-    } catch (error) {
-        next(error)
-    }
+const result = await data.list();
+res.json(result);
 }
 
 // getById
-const getById = async (req, res, next) => {
-    try {
-      const {id} = req.params;
-      const result = await data.getContactById(id);
-      if(!result) {
+const getById = async (req, res) => {
+    const {id} = req.params;
+    const result = await data.getContactById(id);
+    if(!result) {
         throw HttpError(404, "Not found");
-      }
-      res.json(result);
     }
-    catch (error) {
-      next(error);
-    }
+    res.json(result);
 }
 
 // addById
-const addById = async(req, res, next)=> {
-    try {
-      const {error} = addSchema.validate(req.body);
-      if(error) {
-        throw HttpError(400, error.message);
-      }
+const addById = async(req, res)=> {
       const result = await data.addById(req.body);
       res.status(201).json(result);
     }
-    catch(error) {
-      next(error);
-    }
-  }
 
 //   updateById
-  const updateById = async (req, res, next) => {
-    try {
-      const {error} = addSchema.validate(req.body);
-      if(error) {
-        throw HttpError(400, error.message);
-      }
-      const {id} = req.params;
-      const result = await data.updateById(id, req.body);
-      if(!result) {
+  const updateById = async (req, res) => {
+    const {id} = req.params;
+    const result = await data.updateById(id, req.body);
+    if(!result) {
         throw HttpError(404, "Not found");
-      }
-      res.json(result);
     }
-    catch(error) {
-      next(error);
+    res.json(result);
     }
-  }
 
 // deleteById
- const deleteById = async (req, res, next) => {
-    try {
-      const {id} = req.params;
-      const result = await data.removeContact(id);
-      if(!result) {
+ const deleteById = async (req, res) => {
+    const {id} = req.params;
+    const result = await data.removeContact(id);
+    if(!result) {
         throw HttpError(404, "Not found");
-      }
-      res.json({
-        message: "contact deleted"
-      })
-    } 
-    catch (error) {
-      next(error);
     }
-  }
+    res.json({
+    message: "contact deleted"
+    })
+    } 
+
 
 module.exports = { 
-    list,
-    getById,
-    addById,
-    updateById,
-    deleteById
+    list: ctrlWrapper(list),
+    getById: ctrlWrapper(getById),
+    deleteById: ctrlWrapper(deleteById),
+    addById: ctrlWrapper(addById),
+    updateById: ctrlWrapper(updateById),
 }
