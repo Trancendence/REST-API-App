@@ -12,13 +12,14 @@ router.get("/", ctrl.list);
 // Get by id
 router.get("/:id", ctrl.getById);
 
-// Post
+// Add by id
 router.post("/", validateBody(schemas.addSchema), ctrl.addById);
 
-// Delete
+// Delete by id
 router.delete('/:id', ctrl.deleteById);
 
-// Put
+// Update by id
 router.put('/:id', validateBody(schemas.addSchema), ctrl.updateById);
 
+// Export
 module.exports = router

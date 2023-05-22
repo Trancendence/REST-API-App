@@ -1,10 +1,11 @@
-const data = require("../models/contacts");
+// Import
+const Contact = require("../models/contact");
 const { HttpError, ctrlWrapper } = require('../helpers');
 
 
 // list
 const list = async(req, res)=> {
-const result = await data.list();
+const result = await Contact.find();
 res.json(result);
 }
 
