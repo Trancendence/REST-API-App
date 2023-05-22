@@ -2,6 +2,7 @@ const fs = require('fs/promises');
 const path = require("node:path");
 const {nanoid} = require("nanoid");
 const contactsPath = path.join(__dirname, "contacts.json");
+
 const updateContacts = async (contact) => 
 await fs.writeFile(contactsPath, JSON.stringify(contact, null, 2));
 
