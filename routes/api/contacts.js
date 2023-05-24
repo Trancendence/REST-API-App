@@ -21,5 +21,8 @@ router.delete('/:id', isValidId, ctrl.deleteById);
 // // Update by id
 router.put('/:id', isValidId, validateBody(schemas.addSchema), ctrl.updateById);
 
+// // Patch by id
+router.patch('/:id/favorite', isValidId, validateBody(schemas.updateFavoriteSchema), ctrl.updateFavorite);
+
 // Export
 module.exports = router
