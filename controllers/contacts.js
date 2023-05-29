@@ -57,7 +57,7 @@ const addById = async(req, res)=> {
     })
     } 
 
-
+// Export
 module.exports = { 
     list: ctrlWrapper(list),
     getById: ctrlWrapper(getById),

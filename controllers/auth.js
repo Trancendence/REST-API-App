@@ -1,9 +1,11 @@
+// Import
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {User} = require("../models/user");
 const { ctrlWrapper, HttpError } = require('../helpers');
 const {SECRET_KEY} = process.env;
 
+// Register
 const register = async(req, res)=> {
     const {email, password} = req.body;
     const user = await User.findOne({email}); 
@@ -22,6 +24,7 @@ const register = async(req, res)=> {
     })
 }
 
+// Login
 const login = async(req, res)=> {
     const {email, password} = req.body;
     const user = await User.findOne({email});
@@ -44,6 +47,7 @@ const login = async(req, res)=> {
     })
 }
 
+// Export
 module.exports = {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
